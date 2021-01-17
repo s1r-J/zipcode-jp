@@ -1,0 +1,33 @@
+{
+  "name": "zipcode-jp",
+  "version": "0.1.0-20200101",
+  "description": "Lookup address info by zipcode in Japan.",
+  "main": "index.js",
+  "dependencies": {
+    "adm-zip": "^0.5.1",
+    "csv-writer": "^1.6.0",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "iconv-lite": "^0.6.2",
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "update-zipcode": "node update",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s1r-J/zipcode-jp.git"
+  },
+  "author": "s1r-J",
+  "keywords": [
+    "zipcode",
+    "japan"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/s1r-J/zipcode-jp/issues"
+  },
+  "homepage": "https://github.com/s1r-J/zipcode-jp#readme"
+}

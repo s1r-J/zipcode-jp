@@ -1,0 +1,31 @@
+name: Update Zip Code
+on: 
+  schedule:
+    # every monday at 12:00(JST)
+    - cron: '0 3 * * 1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+        registry-url: 'https://registry.npmjs.org'
+    - name: Update zip_codes.csv
+      run: | 
+        npm install
+        npm run update-zipcode
+    - name: Commit
+      run: |
+        git config --global user.email "s1r.aria.azureglo@gmail.com"
+        git config --global user.email "s1r-J"
+        git add .
+        git commit -m "Update $(date +'%Y-%m-%d')"
+    - name: Publish
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

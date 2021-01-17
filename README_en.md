@@ -68,7 +68,9 @@ zipcode.lookup('1000001');
 
 ## Install
 
-npm
+[npm](https://www.npmjs.com/package/@s1r-j/zipcode-jp)
+
+[![npm version](https://badge.fury.io/js/%40s1r-j%2Fzipcode-jp.svg)](https://badge.fury.io/js/%40s1r-j%2Fzipcode-jp)
 
 ## Licence
 

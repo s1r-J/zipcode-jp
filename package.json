@@ -1,5 +1,5 @@
 {
-  "name": "zipcode-jp",
+  "name": "@s1r-j/zipcode-jp",
   "version": "0.1.0-20200101",
   "description": "Lookup address info by zipcode in Japan.",
   "main": "index.js",

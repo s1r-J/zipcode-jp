@@ -5,7 +5,7 @@ const moment = require('moment');
 const iconv = require('iconv-lite');
 const writer = require('csv-writer').createObjectCsvWriter;
 
-console.log('Start...');
+console.log('Start KEN_ALL...');
 
 const file_url = 'https://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip';
 const csvFileName = 'KEN_ALL.CSV';
@@ -23,7 +23,7 @@ https.get(file_url, function(res) {
             pos += data[i].length; 
         } 
 
-        console.log('Download zip file.');
+        console.log('Download KEN_ALL zip file.');
         const zip = new admZip(buf);
         zip.extractAllTo('./', true);
 
@@ -202,6 +202,139 @@ function makeZipCodesCsv() {
     csvWriter.writeRecords(csv)
         .then(() => {
             fs.unlinkSync(csvFileName);
+
+            let json = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+            const version = json.version.substring(0, 6).concat(`${moment().format('YYYYMMDD')}`);
+            json.version = version;
+            fs.writeFileSync('./package.json', JSON.stringify(json, null, 2));
+
+            console.log(`...Done: version is ${version}`);
+    });
+}
+
+console.log('Start JIGYOSYO...');
+
+const jigyosyo_file_url = 'https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip';
+const jigyosyoCsvFileName = 'JIGYOSYO.CSV';
+
+https.get(jigyosyo_file_url, function(res) {
+    let data = [], dataLen = 0; 
+
+    res.on('data', function(chunk) {
+        data.push(chunk);
+        dataLen += chunk.length;
+    }).on('end', function() {
+        const buf = Buffer.alloc(dataLen);
+        for (let i = 0, len = data.length, pos = 0; i < len; i++) { 
+            data[i].copy(buf, pos); 
+            pos += data[i].length; 
+        } 
+
+        console.log('Download JISGYOSYO zip file.');
+        const zip = new admZip(buf);
+        zip.extractAllTo('./', true);
+
+        makeJigyosyoZipCodesCsv();
+    });
+});
+
+function makeJigyosyoZipCodesCsv() {
+
+    const file = fs.readFileSync('./' + jigyosyoCsvFileName);
+    const text = iconv.decode(Buffer.from(file), 'Shift_JIS');
+
+    let csv = [];
+    const lines = text.split('\r\n');
+    lines.forEach((line, idx) => {
+        if (line.length === 0) {
+            return;
+        }
+        let parts = line.split(',').map(c => c.replace(/"/g, ''));
+        let record = {
+            jis: parts[0],
+            jigyosyoKana: parts[1],
+            jigyosyo: parts[2],
+            pref: parts[3],
+            city: parts[4],
+            town: parts[5],
+            unit: parts[6],
+            zipCode: parts[7],
+            oldZipCode: parts[8],
+            office: parts[9],
+            codeType: parts[10],
+            multiCode: parts[11],
+            reviseCode: parts[12],
+        };
+        csv.push(record);
+    });
+
+    console.log(`Records: ${csv.length}`);
+
+    const csvWriter = writer({
+        path: './jigyosyo_zip_codes.csv',
+        header: [
+            {
+                id: 'jis',
+                title: 'JIS'
+            },
+            {
+                id: 'jigyosyoKana',
+                title: 'JigyosyoKana'
+            },
+            {
+                id: 'jigyosyo',
+                title: 'Jigyosyo'
+            },
+            {
+                id: 'pref',
+                title: 'Pref'
+            },
+            {
+                id: 'city',
+                title: 'City'
+            },
+            {
+                id: 'town',
+                title: 'Town'
+            },
+            {
+                id: 'unit',
+                title: 'Unit'
+            },
+            {
+                id: 'zipCode',
+                title: 'ZipCode'
+            },
+            {
+                id: 'oldZipCode',
+                title: 'OldZipCode'
+            },
+            {
+                id: 'office',
+                title: 'Office'
+            },
+            {
+                id: 'codeType',
+                title: 'CodeType'
+            },
+            {
+                id: 'multiCode',
+                title: 'MultiCode'
+            },
+            {
+                id: 'reviceCode',
+                title: 'ReviseCode'
+            },
+        ],
+        encoding: 'utf8',
+        append: false,
+        recordDelimiter: '\r\n',
+        alwaysQuote: true
+    });
+
+    csvWriter.writeRecords(csv)
+        .then(() => {
+            fs.unlinkSync(jigyosyoCsvFileName);
 
             let json = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
             const version = json.version.substring(0, 6).concat(`${moment().format('YYYYMMDD')}`);

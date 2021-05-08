@@ -107,6 +107,10 @@ version 0.2以降では[大口事業所](https://www.post.japanpost.jp/zipcode/d
 
 ## Usage
 
+v0.3以降ではCommonJSだけでなく、ES Modulesに対応しました。
+
+### CommonJS
+
 ```js
 const zipcode = require('zipcode-jp');
 
@@ -130,7 +134,33 @@ zipcode.lookup('1000001');
 //     reason: '0'
 //   }
 // ]
+```
 
+### ES Modules
+
+```js
+import zipcode from '@s1r-j/zipcode-jp';
+
+zipcode.lookup('1000001');
+// [
+//   {
+//     jis: '13101',
+//     oldZipCode: '100  ',
+//     zipCode: '1000001',
+//     prefKana: 'ﾄｳｷｮｳﾄ',
+//     cityKana: 'ﾁﾖﾀﾞｸ',
+//     townKana: 'ﾁﾖﾀﾞ',
+//     pref: '東京都',
+//     city: '千代田区',
+//     town: '千代田',
+//     multiZipCode: '0',
+//     koaza: '0',
+//     block: '0',
+//     multiTown: '0',
+//     update: '0',
+//     reason: '0'
+//   }
+// ]
 ```
 
 ## Install

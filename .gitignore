@@ -1,3 +1,7 @@
+# output
+esm
+lib
+
 # Logs
 logs
 *.log

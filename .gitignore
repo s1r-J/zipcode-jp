@@ -1,6 +1,8 @@
 # output
-esm
-lib
+esm/*
+!esm/.gitkeep
+lib/*
+!lib/.gitkeep
 
 # Logs
 logs

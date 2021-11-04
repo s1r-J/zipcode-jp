@@ -22,8 +22,8 @@
   "scripts": {
     "update-zipcode": "node update",
     "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc -p tsconfig.cjs.json && cp jigyosyo_zip_codes.csv zip_codes.csv ./lib",
-    "build:esm": "tsc -p tsconfig.esm.json && cp jigyosyo_zip_codes.csv zip_codes.csv ./esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

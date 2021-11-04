@@ -130,7 +130,7 @@ function makeZipCodesCsv() {
     console.log(`Records: ${csv.length}`);
 
     const csvWriter = writer({
-        path: './zip_codes.csv',
+        path: './data/zip_codes.csv',
         header: [
             {
                 id: 'jis',
@@ -209,7 +209,9 @@ function makeZipCodesCsv() {
             fs.writeFileSync('./package.json', JSON.stringify(json, null, 2));
 
             console.log(`...Done: version is ${version}`);
-    });
+        }).catch((e) => {
+            console.error(e);
+        });
 }
 
 console.log('Start JIGYOSYO...');
@@ -271,7 +273,7 @@ function makeJigyosyoZipCodesCsv() {
     console.log(`Records: ${csv.length}`);
 
     const csvWriter = writer({
-        path: './jigyosyo_zip_codes.csv',
+        path: './data/jigyosyo_zip_codes.csv',
         header: [
             {
                 id: 'jis',

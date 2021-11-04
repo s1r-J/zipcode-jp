@@ -112,7 +112,7 @@ v0.3以降ではCommonJSだけでなく、ES Modulesに対応しました。
 ### CommonJS
 
 ```js
-const zipcode = require('zipcode-jp');
+const zipcode = require('@s1r-j/zipcode-jp');
 
 zipcode.lookup('1000001');
 // [

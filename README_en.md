@@ -112,7 +112,7 @@ Since version 0.3, this module not only target to CommonJS, but also ES Modules.
 ### CommonJS
 
 ```js
-const zipcode = require('zipcode-jp');
+const zipcode = require('@s1r-j/zipcode-jp');
 
 zipcode.lookup('1000001');
 // [

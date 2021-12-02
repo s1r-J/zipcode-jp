@@ -1,6 +1,6 @@
 {
   "name": "@s1r-j/zipcode-jp",
-  "version": "0.3.1-20211001",
+  "version": "0.4.0-20211203",
   "description": "Lookup address info by zipcode in Japan.",
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -22,8 +22,8 @@
   "scripts": {
     "update-zipcode": "node update",
     "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc -p tsconfig.cjs.json && cp jigyosyo_zip_codes.csv zip_codes.csv ./lib",
-    "build:esm": "tsc -p tsconfig.esm.json && cp jigyosyo_zip_codes.csv zip_codes.csv ./esm",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,7 +33,8 @@
   "author": "s1r-J",
   "keywords": [
     "zipcode",
-    "japan"
+    "japan",
+    "postal code"
   ],
   "license": "MIT",
   "bugs": {

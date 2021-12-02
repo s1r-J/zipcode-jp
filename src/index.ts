@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import path from 'path';
 
 declare namespace zipcode {
     interface ZipCodeRecord {
@@ -42,7 +43,7 @@ let zipCodeRecords: zipcode.ZipCodeRecord[];
 let jigyosyoRecords: zipcode.JigyosyoRecord[];
 
 function loadData(): void {
-    const data: string = fs.readFileSync(__dirname + '/zip_codes.csv', 'utf8');
+    const data: string = fs.readFileSync(path.resolve(__dirname, '../data/zip_codes.csv'), 'utf8');
     const lines: string[] = data.split('\r\n');
 
     zipCodeRecords = [];
@@ -71,7 +72,7 @@ function loadData(): void {
 }
 
 function loadDataJigyosyo(): void {
-    const data: string = fs.readFileSync(__dirname + '/jigyosyo_zip_codes.csv', 'utf8');
+    const data: string = fs.readFileSync(path.resolve(__dirname + '../data/jigyosyo_zip_codes.csv'), 'utf8');
     const lines: string[] = data.split('\r\n');
 
     jigyosyoRecords = [];

@@ -1,6 +1,6 @@
 {
   "name": "@s1r-j/zipcode-jp",
-  "version": "0.4.1-20241101",
+  "version": "0.4.1-20241201",
   "description": "Lookup address info by zipcode in Japan.",
   "main": "lib/index.js",
   "module": "esm/index.js",
